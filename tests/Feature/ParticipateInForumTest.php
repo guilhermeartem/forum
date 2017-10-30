@@ -15,7 +15,8 @@ class ParticipateInForumTest extends TestCase
     {
         $this->expectException('Illuminate\Auth\AuthenticationException');
 
-        $this->post('/threads/1/replies', []);
+        $this->withoutExceptionHandling()
+            ->post('/threads/1/replies', []);
     }
 
     /** @test*/
