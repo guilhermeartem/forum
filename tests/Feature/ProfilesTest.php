@@ -24,10 +24,10 @@ class ProfilesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = create('App\User');
-        $thread = create('App\Thread', ['user_id' => $user->id]);
+        $this->signIn();
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
-        $this->get("/profiles/{$user->name}")
+        $this->get("/profiles/" . auth()->user()->name)
             ->assertSee($thread->title)
             ->assertSee($thread->body);
     }
