@@ -7,6 +7,12 @@
 window.Vue = require('vue');
 require('./bootstrap');
 
+window.Vue.prototype.authorize = function (handler) {
+    let user = window.App.user;
+
+    return user ? handler(user) : false;
+};
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,7 +21,8 @@ require('./bootstrap');
  */
 
 Vue.component('flash', require('./components/Flash.vue'));
-Vue.component('reply', require('./components/Reply.vue'));
+
+Vue.component('thread-view', require('./pages/Thread.vue'));
 
 const app = new Vue({
     el: '#app'
