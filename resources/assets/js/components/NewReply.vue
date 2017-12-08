@@ -39,7 +39,7 @@
 
         methods: {
             addReply() {
-                axios.post(location.pathname + 'replies', { body: this.body })
+                axios.post(location.pathname + '/replies', { body: this.body })
                         .then(response => {
                             console.log(response);
                             this.body = '';
