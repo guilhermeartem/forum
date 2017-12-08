@@ -13,6 +13,7 @@ class ParticipateInThreadsTest extends TestCase
     /** @test */
     function unauthenticated_users_may_not_add_replies()
     {
+        $this->withExceptionHandling();
         $this->post('/threads/somme-channel/1/replies', [])
             ->assertRedirect('/login');
     }
@@ -34,6 +35,7 @@ class ParticipateInThreadsTest extends TestCase
     /** @test */
     function a_reply_requires_a_body()
     {
+        $this->withExceptionHandling();
         $this->signIn();
 
         $thread = create('App\Thread');
@@ -46,6 +48,7 @@ class ParticipateInThreadsTest extends TestCase
     /** @test */
     function unauthorized_users_cannot_delete_replies()
     {
+        $this->withExceptionHandling();
         $reply = create('App\Reply');
 
         $this->delete("/replies/{$reply->id}")
@@ -71,6 +74,7 @@ class ParticipateInThreadsTest extends TestCase
     /** @test */
     function unauthorized_users_cannot_update_replies()
     {
+        $this->withExceptionHandling();
         $reply = create('App\Reply');
 
         $this->patch("/replies/{$reply->id}")
